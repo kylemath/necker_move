@@ -1,8 +1,8 @@
 from psychopy import visual, core, event
 import random 
 
-mywin = visual.Window([1280, 800], monitor="testMonitor", units="deg",
-						fullscr=True, color= [1,.58,-1])
+mywin = visual.Window([600, 600], monitor="testMonitor", units="deg",
+						color= [1,.58,-1])
 
 green = [-1,1,-1]
 red = [1,-1,-1]
@@ -12,7 +12,7 @@ black = [-1,-1,-1]
 lineWidth = 5 #pixels
 squareSize = 3 #edge size (deg)
 increment = 1e-2 #movement per frame (deg)
-distance = 200 #number of frames out and back
+distance = 400 #number of frames out and back
 
 #create square that stays in middle
 square = visual.ShapeStim(win=mywin, units="deg", vertices = [[0-squareSize, 0-squareSize],
@@ -78,7 +78,6 @@ for i in range(distance):
 	mywin.getMovieFrame()
 
 
-#wait for space, save gif and close
-#event.waitKeys(keyList="space")
-#mywin.saveMovieFrames('necker_move.gif')
+#save gif and close
+mywin.saveMovieFrames('necker_move.gif')
 mywin.close()
