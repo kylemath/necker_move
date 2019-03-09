@@ -1,7 +1,7 @@
 from psychopy import visual, core, event
 import random 
 
-mywin = visual.Window([600, 600], monitor="testMonitor", units="deg",
+mywin = visual.Window([400, 400], monitor="testMonitor", units="deg",
 						color= [1,.58,-1])
 
 green = [-1,1,-1]
@@ -11,8 +11,8 @@ black = [-1,-1,-1]
 
 lineWidth = 5 #pixels
 squareSize = 3 #edge size (deg)
-increment = 1e-2 #movement per frame (deg)
-distance = 400 #number of frames out and back
+increment = .04 #movement per frame (deg)
+distance = 100 #number of frames out and back
 
 #create square that stays in middle
 square = visual.ShapeStim(win=mywin, units="deg", vertices = [[0-squareSize, 0-squareSize],
@@ -48,36 +48,63 @@ mid_square.draw()
 mywin.flip()
 mywin.getMovieFrame()
 
-#each frame of animation
-for i in range(distance):
-	
-	#out and back
-	if i <= distance/2:
-		square.pos = (square.pos[0] - increment, 
-					  square.pos[1] + increment)
-	else:
-		square.pos = (square.pos[0] + increment, 
-					  square.pos[1] - increment)	
+angles = ['NW','SE','NE','SW']
+for angle in angles:
+	#each frame of animation
+	for i in range(distance):
+		
+		if angle == 'NW':
+			#out and back
+			if i <= distance/2:
+				square.pos = (square.pos[0] - increment, 
+							  square.pos[1] + increment)
+			else:
+				square.pos = (square.pos[0] + increment, 
+							  square.pos[1] - increment)	
+		if angle == 'NE':
+			#out and back
+			if i <= distance/2:
+				square.pos = (square.pos[0] + increment, 
+							  square.pos[1] + increment)
+			else:
+				square.pos = (square.pos[0] - increment, 
+							  square.pos[1] - increment)	
+		if angle == 'SE':
+			#out and back
+			if i <= distance/2:
+				square.pos = (square.pos[0] + increment, 
+							  square.pos[1] - increment)
+			else:
+				square.pos = (square.pos[0] - increment, 
+							  square.pos[1] + increment)	
+		if angle == 'SW':
+			#out and back
+			if i <= distance/2:
+				square.pos = (square.pos[0] - increment, 
+							  square.pos[1] - increment)
+			else:
+				square.pos = (square.pos[0] + increment, 
+							  square.pos[1] + increment)						  		
 
-	#connecting lines change
-	topLeftLine.start =  [square.pos[0] - squareSize,      	square.pos[1] + squareSize]
-	topRightLine.start = [square.pos[0] + squareSize, 		square.pos[1] + squareSize]
-	botLeftLine.start =  [square.pos[0] - squareSize, 		square.pos[1] - squareSize]
-	botRightLine.start = [square.pos[0] + squareSize, 		square.pos[1] - squareSize]
+		#connecting lines change
+		topLeftLine.start =  [square.pos[0] - squareSize,      	square.pos[1] + squareSize]
+		topRightLine.start = [square.pos[0] + squareSize, 		square.pos[1] + squareSize]
+		botLeftLine.start =  [square.pos[0] - squareSize, 		square.pos[1] - squareSize]
+		botRightLine.start = [square.pos[0] + squareSize, 		square.pos[1] - squareSize]
 
-	#Draw it all
-	square.draw()
-	topLeftLine.draw()
-	topRightLine.draw()
-	botLeftLine.draw()
-	botRightLine.draw()
-	mid_square.draw()
-	
-	#flip, save frame for gif, and wait
-	mywin.flip()
-	mywin.getMovieFrame()
+		#Draw it all
+		square.draw()
+		topLeftLine.draw()
+		topRightLine.draw()
+		botLeftLine.draw()
+		botRightLine.draw()
+		mid_square.draw()
+		
+		#flip, save frame for gif, and wait
+		mywin.flip()
+		mywin.getMovieFrame()
 
 
 #save gif and close
-mywin.saveMovieFrames('necker_move.gif')
+mywin.saveMovieFrames('necker_move_4d.gif')
 mywin.close()
