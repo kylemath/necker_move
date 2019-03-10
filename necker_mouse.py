@@ -4,17 +4,12 @@ import random
 mywin = visual.Window([400, 400], monitor="testMonitor", units="deg",
 						color= [1,.58,-1])
 mywin.mouseVisible = False
-
 mouse = event.Mouse(win=mywin,newPos=[0,0],visible=False)
 
-green = [-1,1,-1]
-red = [1,-1,-1]
-blue = [-1,-1,1]
 black = [-1,-1,-1]
 
 lineWidth = 5 #pixels
 squareSize = 3 #edge size (deg)
-how_long = 1000 #number of frames out and back
 
 #create square that stays in middle
 square = visual.ShapeStim(win=mywin, units="deg", vertices = [[0-squareSize, 0-squareSize],
@@ -50,13 +45,6 @@ mid_square.draw()
 mywin.flip()
 mywin.getMovieFrame()
 
-def get_keypress():
-	keys = event.getKeys()
-	if keys:
-		return keys[0]
-	else:
-		return None
-
 while True:
 	
 	square.pos = mouse.getPos()
@@ -85,6 +73,6 @@ while True:
 			break
 
 #save gif and close
-mywin.saveMovieFrames('necker_move_mouse.gif')
+#mywin.saveMovieFrames('necker_move_mouse.gif')
 mywin.mouseVisible = True
 mywin.close()
