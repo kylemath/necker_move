@@ -1,5 +1,4 @@
-from psychopy import visual, core, event
-import random 
+from psychopy import visual, event
 
 mywin = visual.Window([400, 400], monitor="testMonitor", units="deg",
 						color= [1,.58,-1])
