@@ -14,6 +14,8 @@ squareSize = 3 #edge size (deg)
 increment = .04 #movement per frame (deg)
 distance = 100 #number of frames out and back
 
+fixation = visual.GratingStim(win=mywin, size=0.1, pos=[0, 0], sf=0)                            
+
 #create square that stays in middle
 square = visual.ShapeStim(win=mywin, units="deg", vertices = [[0-squareSize, 0-squareSize],
 											[0-squareSize, 0+squareSize],
@@ -43,6 +45,7 @@ botLeftLine.end	  =  [mid_square.pos[0] - squareSize,	mid_square.pos[1] - square
 botRightLine.end   = [mid_square.pos[0] + squareSize, 	mid_square.pos[1] - squareSize]
 
 #draw first frame
+fixation.draw()
 square.draw()
 mid_square.draw()
 mywin.flip()
@@ -93,6 +96,7 @@ for angle in angles:
 		botRightLine.start = [square.pos[0] + squareSize, 		square.pos[1] - squareSize]
 
 		#Draw it all
+		fixation.draw()
 		square.draw()
 		topLeftLine.draw()
 		topRightLine.draw()
@@ -106,5 +110,5 @@ for angle in angles:
 
 
 #save gif and close
-mywin.saveMovieFrames('necker_move_4d.gif')
+mywin.saveMovieFrames('necker_move_4d_fix.gif')
 mywin.close()
